@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Manage Users</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container-fluid text-center">
+		<div>
+			<h2>Manage Customers</h2>
+		</div>
+		<div class="m-2">
+			<a class="h3" th:href="@{/customer/new}">Add New Customer</a>
+		</div>
+
+		<div class="title_right">
+			<div
+				class="col-md-3 col-sm-3 col-xs-12 form-group pull-right top_search">
+				<div class="input-group">
+					<a class="btn btn-primary"
+						th:href="@{/customer/fetch/sunbase/db}"> <i
+						class="fa fa-refresh"></i> Sync 
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success text-center">
+			[[${message}]]</div>
+
+		<div>
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Address</th>
+						<th>City</th>
+						<th>State</th>
+						<th>E-mail</th>
+						<th>Phone</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="customer : ${listCustomers}">
+						<tr>
+							<td>[[${customer.firstName}]]</td>
+							<td>[[${customer.lastName}]]</td>
+							<td>[[${customer.address}]]</td>
+							<td>[[${customer.city}]]</td>
+							<td>[[${customer.state}]]</td>
+							<td>[[${customer.email}]]</td>
+							<td>[[${customer.phone}]]</td>
+							<td><a class="h4 mr-3"
+								th:href="@{'/customer/edit/' + ${customer.id}}">Edit</a> <a
+								class="h4" th:href="@{'/customer/delete/' + ${customer.id}}">Delete</a>
+							</td>
+						</tr>
+					</th:block>
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</body>
+</html>
